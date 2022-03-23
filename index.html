@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>REGEX VALIDATION</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+</head>
+<body>
+    
+    <form onsubmit="handleData(event)">
+        <input placeholder="Enter Regex" name="regex"/>
+        <input placeholder="Enter URL" name="url" />
+        <button type="submit">Check</button>
+    </form>
+    <h3>Result: <span></span></h3>
+    <h1>Regex Example: </h1>
+    <h3>YouTube Link Regex</h3>
+    http(?:s?):\/\/(?:www\.)?youtu(?:be\.com\/watch\?v=|\.be\/)([\w\-\_]*)(&(amp;)?‌​[\w\?‌​=]*)?
+    <h3>Facebook Link Regex</h3>
+    (?:(?:http|https):\/\/)?(?:www.)?facebook.com\/(?:(?:\w)*#!\/)?(?:pages\/)?(?:[?\w\-]*\/)?(?:profile.php\?id=(?=\d.*))?([\w\-]*)?
+    <h3>Web Link Regex</h3>
+    [(http(s)?):\/\/(www\.)?a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)
+    <h3>Twitter Link Regex</h3>
+    (https:\/\/twitter.com\/(?![a-zA-Z0-9_]+\/)([a-zA-Z0-9_]+))
+    <h3>Instagram Link Regex</h3>
+    /(?:(?:http|https):\/\/)?(?:www.)?(?:instagram.com|instagr.am|instagr.com)\/(\w+)/igm
+    <script>
+        const checkRegex = (reg, inpt) => {
+            re = new RegExp(reg);
+            // console.log(re.test(inpt));
+            document.querySelector('span').innerHTML = re.test(inpt);
+        }
+        const handleData = (event) => {
+            const data = handleSubmit(event);
+            checkRegex(data['regex'], data['url']);
+        }
+        const handleEvent = (event) => {
+            let data = {};
+            Array.from(new FormData(event.target).entries()).forEach((e) => {
+                data[e[0]] = e[1];
+            });
+            return data;
+            };
+
+            const handleSubmit = (event) => {
+            event.preventDefault();
+            return handleEvent(event);
+            };
+    </script>
+</body>
+</html>
